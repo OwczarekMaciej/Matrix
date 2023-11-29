@@ -12,9 +12,9 @@ int main(int argc, char const *argv[])
     Matrix mtx3(3,3);
     mtx3 = mtx1 + mtx2;
     std::cout << mtx3 << std::endl;
-    std::cout << std::boolalpha;
-    std::cout << (mtx1 == mtx2) << std::endl;
-    std::cout << (mtx1 != mtx3) << std::endl;
+    // std::cout << std::boolalpha;
+    // std::cout << (mtx1 == mtx2) << std::endl;
+    // std::cout << (mtx1 != mtx3) << std::endl;
     
     return 0;
 }

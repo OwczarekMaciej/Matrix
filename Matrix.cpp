@@ -25,6 +25,14 @@ Matrix::Matrix(const Matrix &source)
     source.mtx_ptr->refcount++;
     mtx_ptr = source.mtx_ptr;
 }
+Matrix &Matrix::operator=(const Matrix &rhs)
+{
+    rhs.mtx_ptr->refcount++;
+    if (--mtx_ptr->refcount == 0)
+        delete mtx_ptr;
+    mtx_ptr = rhs.mtx_ptr;
+    return *this;
+}
 
 Matrix::rcmatrix::rcmatrix(unsigned int rows, unsigned int columns)
     : rows(rows), columns(columns)
@@ -99,10 +107,13 @@ Matrix &Matrix::operator+=(const Matrix &rhs)
     {
         if (this->areMtxEven(rhs))
         {
-            mtx_ptr = mtx_ptr->detach();
+            rcmatrix *temp = new rcmatrix(mtx_ptr->rows, mtx_ptr->columns);
             for (unsigned int i = 0; i < mtx_ptr->rows; i++)
                 for (unsigned int j = 0; j < mtx_ptr->columns; j++)
-                    mtx_ptr->data[i][j] += rhs.mtx_ptr->data[i][j];
+                    temp->data[i][j] = mtx_ptr->data[i][j] + rhs.mtx_ptr->data[i][j];
+            if(--mtx_ptr->refcount == 0)
+                delete mtx_ptr;
+            mtx_ptr = temp;
         }
         else
             throw IllegalMatrixDiemensions();
@@ -121,10 +132,13 @@ Matrix &Matrix::operator-=(const Matrix &rhs)
     {
         if (this->areMtxEven(rhs))
         {
-            mtx_ptr = mtx_ptr->detach();
+            rcmatrix *temp = new rcmatrix(mtx_ptr->rows, mtx_ptr->columns);
             for (unsigned int i = 0; i < mtx_ptr->rows; i++)
                 for (unsigned int j = 0; j < mtx_ptr->columns; j++)
-                    mtx_ptr->data[i][j] -= rhs.mtx_ptr->data[i][j];
+                    temp->data[i][j] = mtx_ptr->data[i][j] - rhs.mtx_ptr->data[i][j];
+            if(--mtx_ptr->refcount == 0)
+                delete mtx_ptr;
+            mtx_ptr = temp;
         }
         else
             throw IllegalMatrixDiemensions();

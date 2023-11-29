@@ -17,11 +17,13 @@ public:
     Matrix(unsigned int rows, unsigned int comlumns);
     ~Matrix();
     Matrix(const Matrix &source);
+    Matrix &operator=(const Matrix &rhs);
     Matrix &operator+=(const Matrix &rhs);
     Matrix &operator-=(const Matrix &rhs);
     Matrix &operator*=(const Matrix &rhs);
     Matrix operator+(const Matrix &rhs) const;
     Matrix operator-(const Matrix &rhs) const;
+    Matrix &operator*(const Matrix &rhs) const;
 
     bool operator==(const Matrix &rhs) const;
     bool operator!=(const Matrix &rhs) const;
