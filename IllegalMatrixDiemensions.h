@@ -12,4 +12,4 @@ public:
     }
 };
 
-#endif
+#endif // __ILLEGALMATRIXDIEMENSIONS_H__

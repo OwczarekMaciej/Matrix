@@ -1,20 +1,32 @@
 #ifndef MATRIX_H
 #define MATRIX_H
 
+#include <iostream>
 #include "IllegalInput.h"
 #include "MemoryAllocFailed.h"
 #include "IllegalMatrixDiemensions.h"
-#include <iostream>
 
 class Matrix
 {
+    friend std::ostream &operator<<(std::ostream &os, const Matrix &rhs);
+
     struct rcmatrix;
-    rcmatrix *data;
+    rcmatrix *mtx_ptr;
 public:
     Matrix();
+    Matrix(unsigned int rows, unsigned int comlumns);
     ~Matrix();
+    Matrix(const Matrix &source);
+    Matrix &operator+=(const Matrix &rhs);
+    Matrix &operator-=(const Matrix &rhs);
+    Matrix &operator*=(const Matrix &rhs);
+    Matrix operator+(const Matrix &rhs) const;
+    Matrix operator-(const Matrix &rhs) const;
 
-private:
+    bool operator==(const Matrix &rhs) const;
+    bool operator!=(const Matrix &rhs) const;
+
+    bool areMtxEven(const Matrix &rhs) const;
 };
 
 struct Matrix::rcmatrix
@@ -24,7 +36,7 @@ struct Matrix::rcmatrix
     unsigned int rows;
     unsigned int columns;
 
-    rcmatrix(unsigned int rows = 0, unsigned int columns = 0);
+    rcmatrix(unsigned int rows, unsigned int columns);
     ~rcmatrix();
     rcmatrix *detach();
 };
