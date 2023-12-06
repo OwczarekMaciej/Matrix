@@ -1,20 +1,119 @@
 #include <iostream>
 #include "Matrix.h"
+#include <fstream>
 
-
-int main(int argc, char const *argv[])
+void assign_and_create_form_file()
 {
-    Matrix mtx1(3,3);
-    std::cout << mtx1 << std::endl;
-    Matrix mtx2(3,3);
-    std::cout << mtx2 << std::endl;
+    Matrix a, b(2, 2);
+    std::ifstream file1("mtx1.txt");
+    file1 >> a;
 
-    Matrix mtx3(3,3);
-    mtx3 = mtx1 + mtx2;
-    std::cout << mtx3 << std::endl;
-    // std::cout << std::boolalpha;
-    // std::cout << (mtx1 == mtx2) << std::endl;
-    // std::cout << (mtx1 != mtx3) << std::endl;
+    b(0, 0) = 1;
+	b(0, 1) = 2;
+	b(1, 0) = 3;
+	b(1, 1) = 4;
+
+    Matrix c(a);
+
+    std::cout << "a: " << std::endl << a << std::endl;
+	std::cout << "b: " << std::endl << b << std::endl;
+    std::cout << "c: " << std::endl << b << std::endl;
+    std::cout << "=========================" << std::endl;
+
+    file1.close();
+}
+
+void addition()
+{
+    std::ifstream file1("mtx1.txt");
+    Matrix a;
+    file1 >> a;
+    std::ifstream file2("mtx4.txt");
+    Matrix b;
+    file2 >> b;
+
+    Matrix c(2,2);
+    c = b + a;
+    a +=b;
+    std::cout << "a: " << std::endl << a << std::endl;
+	std::cout << "b: " << std::endl << b << std::endl;
+    std::cout << "c: " << std::endl << c << std::endl;
+
+    std::cout << "=========================" << std::endl;
+
+    file1.close();
+    file2.close();
+} 
+
+void substraction()
+{
+    std::ifstream file1("mtx1.txt");
+    Matrix a;
+    file1 >> a;
+    std::ifstream file2("mtx4.txt");
+    Matrix b;
+    file2 >> b;
+
+    Matrix c(2,2);
+    c = b - a;
+    a -=b;
+    std::cout << "a: " << std::endl << a << std::endl;
+	std::cout << "b: " << std::endl << b << std::endl;
+    std::cout << "c: " << std::endl << c << std::endl;
+
+    std::cout << "=========================" << std::endl;
+
+    file1.close();
+    file2.close();
+}
+
+void multiplication()
+{
+    std::ifstream file1("mtx2.txt");
+    Matrix a;
+    file1 >> a;
+    std::ifstream file2("mtx3.txt");
+    Matrix b;
+    file2 >> b;
+
+    Matrix c(2,2), d(a);
+    c = a * b;
+    d *= b;
+
+    std::cout << "a: " << std::endl << a << std::endl;
+	std::cout << "b: " << std::endl << b << std::endl;
+    std::cout << "c: " << std::endl << c << std::endl;
+    std::cout << "d: " << std::endl << d << std::endl;
+
+    std::cout << "=========================" << std::endl;
+
+    file1.close();
+    file2.close();
+}
+
+void comp_test()
+{
+    std::ifstream file1("mtx1.txt");
+    Matrix a;
+    file1 >> a;
+    std::ifstream file2("mtx4.txt");
+    Matrix b;
+    file2 >> b;
+    Matrix c(a);
+
+    std::cout << std::boolalpha;
+    std::cout << "a == b: " << (a == b) << std::endl;
+	std::cout << "a != b: " << (a != b) << std::endl;
+    std::cout << "a == c: " << (a == c) << std::endl;
+}
+
+
+int main () {
+    assign_and_create_form_file();
+    addition();
+    substraction();
+    multiplication();
+    comp_test();
     
-    return 0;
+	return 0;
 }

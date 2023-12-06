@@ -1,6 +1,5 @@
 {
     "files.associations": {
-        "memory": "cpp",
         "array": "cpp",
         "atomic": "cpp",
         "bit": "cpp",
@@ -25,9 +24,9 @@
         "algorithm": "cpp",
         "functional": "cpp",
         "iterator": "cpp",
+        "memory": "cpp",
         "memory_resource": "cpp",
         "numeric": "cpp",
-        "optional": "cpp",
         "random": "cpp",
         "string_view": "cpp",
         "system_error": "cpp",
@@ -46,7 +45,9 @@
         "streambuf": "cpp",
         "typeinfo": "cpp",
         "ctime": "cpp",
+        "optional": "cpp",
         "iomanip": "cpp",
-        "sstream": "cpp"
+        "sstream": "cpp",
+        "fstream": "cpp"
     }
 }
