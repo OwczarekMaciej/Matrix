@@ -2,6 +2,8 @@
 #define MATRIX_H
 
 #include <iostream>
+#include <sstream> 
+#include <string>
 #include "IllegalInput.h"
 #include "MemoryAllocFailed.h"
 #include "IllegalMatrixDiemensions.h"
@@ -14,6 +16,7 @@ class Matrix
     struct rcmatrix;
     rcmatrix *mtx_ptr;
     class Mref;
+    bool areMtxEven(const Matrix &rhs) const;
 
 public:
     Matrix();
@@ -31,7 +34,6 @@ public:
     bool operator==(const Matrix &rhs) const;
     bool operator!=(const Matrix &rhs) const;
 
-    bool areMtxEven(const Matrix &rhs) const;
 
     Mref operator()(unsigned int x, unsigned int y);
     double operator()(unsigned int x, unsigned int y) const;
